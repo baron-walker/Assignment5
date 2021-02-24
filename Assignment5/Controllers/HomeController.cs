@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Assignment5.Models.ViewModels;
 
 namespace Assignment5.Controllers
 {
@@ -15,13 +16,16 @@ namespace Assignment5.Controllers
 
         private iBooksRepository _repository;
 
+        // The number of books to appear on each page
+        public int PageSize = 5;
+
         public HomeController(ILogger<HomeController> logger, iBooksRepository repository)
         {
             _logger = logger;
             _repository = repository;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
             if (!ModelState.IsValid)
             {
@@ -29,7 +33,21 @@ namespace Assignment5.Controllers
             }
             else
             {
-                return View(_repository.Books);
+                return View(new BookListViewModel
+                {
+                    // Only take five books to display
+                    Books = _repository.Books
+                        .OrderBy(b => b.BookID)
+                        .Skip((page - 1) * PageSize)
+                        .Take(PageSize)
+                    ,
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalNumItems = _repository.Books.Count()
+                    }
+                });
             }
         }
 
