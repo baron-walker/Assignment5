@@ -20,6 +20,7 @@ namespace Assignment5.Components
         {
             ViewBag.SelectedCategory = RouteData?.Values["category"];
 
+            // Query all unique categories from the books repository
             return View(repository.Books
                 .Select(x => x.Category)
                 .Distinct()

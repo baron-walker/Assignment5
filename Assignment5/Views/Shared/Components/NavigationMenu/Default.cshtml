@@ -4,6 +4,7 @@
 
 @foreach (string category in Model)
 {
+    <!-- Styling for category selection buttons -->
     <a class="btn btn-block @(category == ViewBag.SelectedCategory ? "btn-primary" : "btn-outline-secondary")"
        asp-action="Index" 
        asp-controller="Home" 

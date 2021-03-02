@@ -57,14 +57,17 @@ namespace Assignment5
 
             app.UseEndpoints(endpoints =>
             {
+                // url page navigation by category and page number
                 endpoints.MapControllerRoute("catpage",
                     "{category}/{page:int}",
                     new { Controller = "Home", action = "Index" });
 
+                // url page navigation by page number
                 endpoints.MapControllerRoute("page",
                     "{page:int}",
                     new { Controller = "Home", action = "Index" });
 
+                // url page navigation by category
                 endpoints.MapControllerRoute("category",
                     "{category}",
                     new { Controller = "Home", action = "Index", page = 1 });
