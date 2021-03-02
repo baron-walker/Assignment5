@@ -29,7 +29,7 @@ namespace Assignment5
 
             services.AddDbContext<BooksDbContext>(options =>
            {
-               options.UseSqlServer(Configuration["ConnectionStrings:BooksConnection"]);
+               options.UseSqlite(Configuration["ConnectionStrings:BooksConnection"]);
            });
 
             services.AddScoped<iBooksRepository, EFBookRepository>();
@@ -57,6 +57,18 @@ namespace Assignment5
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("catpage",
+                    "{category}/{page:int}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute("page",
+                    "{page:int}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute("category",
+                    "{category}",
+                    new { Controller = "Home", action = "Index", page = 1 });
+
                 endpoints.MapControllerRoute(
                     // Create simple url page navigation
                     "pagination",

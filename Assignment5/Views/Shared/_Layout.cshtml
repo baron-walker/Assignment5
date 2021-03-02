@@ -30,11 +30,25 @@
             </div>
         </nav>
     </header>
+
     <div class="container">
-        <main role="main" class="pb-3">
+        <div class="text-center">
+            <h1 class="display-4">Welcome</h1>
+            <p>See the book list.</p>
+        </div>
+        <div role="main" class="row row-fluid">
+            <div class="text-center col-2">
+                <!--Render category selection-->
+                <vc:navigation-menu />
+            </div>
             <!--Render my pages-->
-            @RenderBody()
-        </main>
+            <div class="col-8">
+                @RenderBody()
+            </div>
+            <div class="card card-title col-2">
+                Place your AD here!
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">

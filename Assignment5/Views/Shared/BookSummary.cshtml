@@ -1,0 +1,16 @@
+﻿@model Book
+
+<div class="col-lg-6 mb-4">
+    <div class="card m-3 p-3" style="background-color:lightgoldenrodyellow;">
+
+        <div class="">
+            <h3>Title: @Model.Title</h3>
+            <p>Author: @Model.AuthFirst @Model.AuthMid @Model.AuthLast </p>
+            <p>Publisher: @Model.Publisher</p>
+            <p>ISBN: @Model.ISBN</p>
+            <p>Classification/Category: @Model.Classification / @Model.Category</p>
+            <p>Price: $@Model.Price</p>
+            <p>Number of Pages: @Model.PageNum</p>
+        </div>
+    </div>
+</div>

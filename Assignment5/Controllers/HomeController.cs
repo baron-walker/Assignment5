@@ -25,7 +25,7 @@ namespace Assignment5.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(string category, int page = 1)
         {
             if (!ModelState.IsValid)
             {
@@ -37,6 +37,7 @@ namespace Assignment5.Controllers
                 {
                     // Only take five books to display
                     Books = _repository.Books
+                        .Where(b => category == null || b.Category == category)
                         .OrderBy(b => b.BookID)
                         .Skip((page - 1) * PageSize)
                         .Take(PageSize)
@@ -45,8 +46,10 @@ namespace Assignment5.Controllers
                     {
                         CurrentPage = page,
                         ItemsPerPage = PageSize,
-                        TotalNumItems = _repository.Books.Count()
-                    }
+                        TotalNumItems = category == null ?_repository.Books.Count() : 
+                            _repository.Books.Where (x => x.Category == category).Count()
+                    },
+                    CurrentCategory = category
                 });
             }
         }
