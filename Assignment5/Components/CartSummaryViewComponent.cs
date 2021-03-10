@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Assignment5.Models;
-namespace SportsStore.Components
+namespace Assignment5.Components
 {
     public class CartSummaryViewComponent : ViewComponent
     {
